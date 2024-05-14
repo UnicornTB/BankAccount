@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-author
+      author: demon
+      changes:
+        - createTable:
+            tableName: Author
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+              - column:
+                  name: name
+                  type: varchar(200)

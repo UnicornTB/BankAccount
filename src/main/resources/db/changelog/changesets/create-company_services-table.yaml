@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-company_services-table
+      author: ZXCdemon
+      changes:
+        - createTable:
+            tableName: company_services
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    unique: true
+                    nullable: false
+                    primaryKeyName: PK_COMPANY_SERVICES
+              - column:
+                  name: company_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: service_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: company_id
+            baseTableName: company_services
+            referencedColumnNames: id
+            referencedTableName: companies
+            constraintName: FK_COMPANY_ID
+
+        - addForeignKeyConstraint:
+            baseColumnNames: company_id
+            baseTableName: company_services
+            referencedColumnNames: id
+            referencedTableName: services
+            constraintName: FK_SERVICE_ID
+
+        - addUniqueConstraint:
+            columnNames: company_id, service_id
+            tableName: company_services

@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user_bank_accounts
+      author: ZXCdemon
+      changes:
+        - createTable:
+            tableName: user_bank_accounts
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    unique: true
+                    nullable: false
+                    primaryKeyName: PK_USER_BANK_ACCOUNT
+              - column:
+                  name: balance
+                  type: numeric
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: account_number
+                  type: varchar(20)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: account_type
+                  type: bigint
+                  constraints:
+                    unique: false
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_bank_accounts
+            referencedColumnNames: id
+            referencedTableName: users
+            constraintName: FK_USER_ID
+
+        - addForeignKeyConstraint:
+            baseColumnNames: account_type
+            baseTableName: user_bank_accounts
+            referencedColumnNames: id
+            referencedTableName: bank_account_types
+            constraintName: FK_BANK_ACCOUNT_TYPE_ID
+
+        - addUniqueConstraint:
+            columnNames: user_id, account_type
+            tableName: user_bank_accounts

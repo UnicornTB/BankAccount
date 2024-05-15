@@ -1,0 +1,63 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-payments-table
+      author: ZXCdemon
+      changes:
+        - createTable:
+            tableName: payments
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    unique: true
+                    nullable: false
+                    primaryKeyName: PK_PAYMENTS
+              - column:
+                  name: user_account_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: service_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: numeric
+                  constraints:
+                    nullable: false
+              - column:
+                  name: company_bank_account_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payment_date
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: user_account_id
+            baseTableName: payments
+            referencedColumnNames: id
+            referencedTableName: user_bank_accounts
+            constraintName: FK_USER_ACCOUNT_ID
+
+        - addForeignKeyConstraint:
+            baseColumnNames: service_id
+            baseTableName: payments
+            referencedColumnNames: id
+            referencedTableName: services
+            constraintName: FK_SERVICE_ID
+
+        - addForeignKeyConstraint:
+            baseColumnNames: company_bank_account_id
+            baseTableName: payments
+            referencedColumnNames: id
+            referencedTableName: company_bank_accounts
+            constraintName: FK_COMPANY_BANK_ACCOUNT_ID

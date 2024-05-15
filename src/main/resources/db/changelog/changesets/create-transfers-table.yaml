@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-transfers-table
+      author: ZXCdemon
+      changes:
+        - createTable:
+            tableName: transfers
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    unique: true
+                    nullable: false
+                    primaryKeyName: PK_TRANSFERS
+              - column:
+                  name: user_account_id_from
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_account_id_to
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: numeric
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transfer_date
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: user_account_id_from
+            baseTableName: transfers
+            referencedColumnNames: id
+            referencedTableName: user_bank_accounts
+            constraintName: FK_USER_ACCOUNT_ID_FROM
+
+        - addForeignKeyConstraint:
+            baseColumnNames: user_account_id_to
+            baseTableName: transfers
+            referencedColumnNames: id
+            referencedTableName: user_bank_accounts
+            constraintName: FK_USER_ACCOUNT_ID_TO

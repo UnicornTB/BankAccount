@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-company_bank_accounts
+      author: ZXCdemon
+      changes:
+        - createTable:
+            tableName: company_bank_accounts
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    unique: true
+                    nullable: false
+                    primaryKeyName: PK_COMPANY_BANK_ACCOUNTS
+              - column:
+                  name: bank_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: company_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: account_number
+                  type: varchar(20)
+                  constraints:
+                    unique: true
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: bank_id
+            baseTableName: company_bank_accounts
+            referencedColumnNames: id
+            referencedTableName: banks
+            constraintName: FK_BANK_ID
+
+        - addForeignKeyConstraint:
+            baseColumnNames: company_id
+            baseTableName: company_bank_accounts
+            referencedColumnNames: id
+            referencedTableName: companies
+            constraintName: FK_COMPANY_ID
+
+        - addUniqueConstraint:
+            columnNames: bank_id, company_id
+            tableName: company_bank_accounts

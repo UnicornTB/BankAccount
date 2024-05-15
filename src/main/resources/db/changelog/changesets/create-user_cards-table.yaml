@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user_cards-table
+      author: ZXCdemon
+      changes:
+        - createTable:
+            tableName: user_cards
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    unique: true
+                    nullable: false
+                    primaryKeyName: PK_USER_CARDS
+              - column:
+                  name: card_number
+                  type: varchar(16)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_bank_account_id
+                  type: bigint
+                  constraints:
+                    unique: false
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: user_bank_account_id
+            baseTableName: user_cards
+            referencedColumnNames: id
+            referencedTableName: user_bank_accounts
+            constraintName: FK_USER_BANK_ACCOUNT_ID

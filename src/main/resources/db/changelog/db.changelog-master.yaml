@@ -1,3 +1,23 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changesets/create-author-table.yaml
+      file: db/changelog/changesets/create-users-table.yaml
+  - include:
+      file: db/changelog/changesets/create-bank_account_types-table.yaml
+  - include:
+      file: db/changelog/changesets/create-user_bank_accounts-table.yaml
+  - include:
+      file: db/changelog/changesets/create-user_cards-table.yaml
+  - include:
+      file: db/changelog/changesets/create-services-table.yaml
+  - include:
+      file: db/changelog/changesets/create-companies-table.yaml
+  - include:
+      file: db/changelog/changesets/create-company_services-table.yaml
+  - include:
+      file: db/changelog/changesets/create-banks-table.yaml
+  - include:
+      file: db/changelog/changesets/create-company_bank_accounts-table.yaml
+  - include:
+      file: db/changelog/changesets/create-payments-table.yaml
+  - include:
+      file: db/changelog/changesets/create-transfers-table.yaml

@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-companies-table
+      author: ZXCdemon
+      changes:
+        - createTable:
+            tableName: companies
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    unique: true
+                    nullable: false
+                    primaryKeyName: PK_COMPANY
+              - column:
+                  name: title
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+

@@ -5,5 +5,5 @@ spring :
     password: 12345678
     driver-class-name: org.postgresql.Driver
   liquibase:
-    enabled: true
+    enabled: false
 
